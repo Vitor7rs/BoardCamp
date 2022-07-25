@@ -28,7 +28,13 @@ export async function getGames(req, res) {
 
 export async function insertGame(req, res) {
     const game = req.body;
+
     try {
+        const existingGame = await db.query('SELECT * FROM games WHERE name = $1', [game.name]);
+        if (existingGame.rowCount > 0) {
+            return res.sendStatus(409)
+        }
+        
         const result = await db.query('SELECT * FROM categories WHERE id = $1', [game.categoryId]);
         if (result.rowCount === 0) {
             return res.status(400).send("category id not found");
