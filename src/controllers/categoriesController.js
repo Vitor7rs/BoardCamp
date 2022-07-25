@@ -3,7 +3,7 @@ import db from "../config/db.js"
 export async function getCategories(req, res){
     try{
         const categories = await db.query("SELECT * FROM categories");
-        return res.status(200).send(categories);
+        return res.status(200).send(categories.rows);
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);
