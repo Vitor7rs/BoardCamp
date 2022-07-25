@@ -9,3 +9,7 @@ export async function getCategories(req, res){
         return res.sendStatus(500);
     }
 }
+
+export async function insertCategory(req, res){
+    
+}
